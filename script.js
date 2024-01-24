@@ -26,5 +26,8 @@ const getMode = (array) => {
   );
   return mode.join(", ");
 }
-
+//getRange Function:Calculates the range (difference between the maximum and minimum) of an array of numbers.
+const getRange = (array) => {
+  return Math.max(...array) - Math.min(...array);
+}
 
