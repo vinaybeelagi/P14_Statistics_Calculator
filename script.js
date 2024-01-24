@@ -40,5 +40,10 @@ const getVariance = (array) => {
   }, 0) / array.length;
   return variance;
 }
-
+//getStandardDeviation Function:Calculates the standard deviation by taking the square root of the variance.
+const getStandardDeviation = (array) => {
+  const variance = getVariance(array);
+  const standardDeviation = Math.sqrt(variance);
+  return standardDeviation;
+}
 
