@@ -1,20 +1,19 @@
-//getMean Function
 const getMean = (array) => array.reduce((acc, el) => acc + el, 0) / array.length;
-//getMedian Function:Calculates the median of an array of numbers.
+
 const getMedian = (array) => {
   const sorted = array.slice().sort((a, b) => a - b);
   const median =
     array.length % 2 === 0
-      ? getMean([sorted[array.length / 2], sorted[array.length / 2 - 1]])
-      : sorted[Math.floor(array.length / 2)];
+    ? getMean([sorted[array.length / 2], sorted[array.length / 2 - 1]])
+    : sorted[Math.floor(array.length / 2)];
   return median;
 }
-//getMode Function:Calculates the mode (most frequent element(s)) of an array of numbers.
+
 const getMode = (array) => {
   const counts = {};
   array.forEach((el) => {
     counts[el] = (counts[el] || 0) + 1;
-  })
+  });
   if (new Set(Object.values(counts)).size === 1) {
     return null;
   }
@@ -26,11 +25,11 @@ const getMode = (array) => {
   );
   return mode.join(", ");
 }
-//getRange Function:Calculates the range (difference between the maximum and minimum) of an array of numbers.
+
 const getRange = (array) => {
   return Math.max(...array) - Math.min(...array);
 }
-//getVariance Function
+
 const getVariance = (array) => {
   const mean = getMean(array);
   const variance = array.reduce((acc, el) => {
@@ -40,10 +39,28 @@ const getVariance = (array) => {
   }, 0) / array.length;
   return variance;
 }
-//getStandardDeviation Function:Calculates the standard deviation by taking the square root of the variance.
+
 const getStandardDeviation = (array) => {
   const variance = getVariance(array);
   const standardDeviation = Math.sqrt(variance);
   return standardDeviation;
 }
 
+const calculate = () => {
+  const value = document.querySelector("#numbers").value;
+  const array = value.split(",").map(el => Number(el.trim())).filter(el => !isNaN(el));
+
+  const mean = getMean(array);
+  const median = getMedian(array);
+  const mode = getMode(array);
+  const range = getRange(array);
+  const variance = getVariance(array);
+  const standardDeviation = getStandardDeviation(array);
+
+  document.querySelector("#mean").textContent = mean;
+  document.querySelector("#median").textContent = median;
+  document.querySelector("#mode").textContent = mode;
+  document.querySelector("#range").textContent = range;
+  document.querySelector("#variance").textContent = variance;
+  document.querySelector("#standardDeviation").textContent = standardDeviation;
+}
